@@ -1,11 +1,12 @@
 import { registerAs, ConfigModuleOptions } from '@nestjs/config';
 import * as Joi from 'joi';
+import { DatabaseConfigs } from '../types';
 
 const common = registerAs('common', () => ({
   port: +process.env.PORT,
 }));
 
-const database = registerAs('db', () => ({
+const database = registerAs<DatabaseConfigs>('db', () => ({
   type: process.env.DB_TYPE,
   host: process.env.DB_HOST,
   port: +process.env.DB_PORT,
